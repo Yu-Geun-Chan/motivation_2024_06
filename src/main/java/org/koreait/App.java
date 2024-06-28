@@ -1,6 +1,7 @@
 package org.koreait;
 
 import org.koreait.motivation.controller.MotivationController;
+import org.koreait.motivation.entity.Motivation;
 import org.koreait.system.controller.SystemController;
 
 import java.util.Scanner;
@@ -29,6 +30,8 @@ public class App {
                 motivationController.add();
             } else if (cmd.equals("list")) {
                 motivationController.list();
+            } else if (cmd.startsWith("delete ")) {
+                motivationController.delete(cmd);
             }
         }
     }

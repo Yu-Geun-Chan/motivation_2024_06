@@ -52,4 +52,33 @@ public class MotivationController {
             System.out.printf("   %d  //    %s     //    %s  \n", motivation.getId(), motivation.getSource(), motivation.getBody());
         }
     }
+
+    public void delete(String cmd) {
+        String[] bits = cmd.split(" ");
+        int id = 0;
+
+        try {
+            id = Integer.parseInt(bits[1]);
+        } catch (NumberFormatException e) {
+            System.out.println("잘못된 명령어 입니다.");
+            return;
+        }
+
+        Motivation foundMotivation = null;
+
+        for (Motivation motivation : motivations) {
+            if (motivation.getId() == id) {
+                foundMotivation = motivation;
+                break;
+            }
+        }
+        if (foundMotivation == null) {
+            System.out.printf("== %d번 motivation은 없습니다. ==\n", id);
+            return;
+        }
+        motivations.remove(foundMotivation);
+
+        System.out.println("== motivation delete ==");
+        System.out.printf("== %d번 motivation은 삭제되었습니다.\n", foundMotivation.getId());
+    }
 }
