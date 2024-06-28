@@ -1,5 +1,7 @@
 package org.koreait;
 
+import org.koreait.Motivation.entity.Motivation;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
