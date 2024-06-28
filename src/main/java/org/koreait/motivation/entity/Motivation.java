@@ -1,11 +1,11 @@
-package org.koreait.Motivation.entity;
+package org.koreait.motivation.entity;
 
 public class Motivation {
     private int id;
     private String body;
     private String source;
 
-    Motivation (int lastId, String body, String source) {
+    public Motivation(int lastId, String body, String source) {
         this.id = lastId;
         this.body = body;
         this.source = source;
