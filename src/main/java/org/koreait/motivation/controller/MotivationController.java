@@ -10,7 +10,6 @@ public class MotivationController {
 
     int lastId;
     List<Motivation> motivations;
-    Rq rq;
 
     public MotivationController() {
         lastId = 0;
@@ -53,9 +52,17 @@ public class MotivationController {
         }
     }
 
-    public void delete() {
+    public void delete(Rq rq) {
+        System.out.println("== delete 실행 ==");
 
-        int id = Integer.parseInt(rq.getParams("id"));
+        int id = 0;
+
+        try {
+            id = Integer.parseInt(rq.getParams("id"));
+        } catch (NumberFormatException e) {
+            System.out.println("== 숫자를 입력하세요. ==");
+            return;
+        }
 
         Motivation foundMotivation = null;
 
@@ -75,9 +82,16 @@ public class MotivationController {
         System.out.printf("== %d번 motivation은 삭제되었습니다.\n", foundMotivation.getId());
     }
 
-    public void update(String cmd) {
+    public void update(Rq rq) {
+        System.out.println("== update 실행 ==");
 
         int id = 0;
+
+        try {
+            id = Integer.parseInt(rq.getParams("id"));
+        } catch (NumberFormatException e) {
+            System.out.println("== 숫자를 입력하세요. ==");
+        }
 
         Motivation foundMotivation = null;
 

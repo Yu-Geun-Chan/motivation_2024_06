@@ -26,6 +26,10 @@ public class App {
 
             Rq rq = new Rq(cmd);
 
+            if (rq.getErrMsg().equals("오타 있음(id)")) {
+                continue;
+            }
+
             switch (rq.getActionMethod()) {
                 case "exit":
                     systemController.exit();
@@ -38,7 +42,8 @@ public class App {
                     motivationController.list();
                     break;
                 case "delete":
-                    motivationController.delete();
+                    motivationController.delete(rq);
+                    break;
                 default:
                     System.out.println("사용할 수 없는 명령어입니다.");
                     break;

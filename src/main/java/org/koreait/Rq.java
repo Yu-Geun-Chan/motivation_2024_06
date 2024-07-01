@@ -7,15 +7,16 @@ import java.util.Map;
 // 커맨드 분석 클래스
 public class Rq {
     private String actionMethod;
-    Map<String, String> params;
+    private Map<String, String> params;
+    private String errMsg = "";
 
     // Rq == Request(요청)
-    public Rq(String cmd){
+    Rq(String cmd){
         // parsing
         String[] cmdBits = cmd.split("\\?", 2);
 
         actionMethod = cmdBits[0];
-        
+
         params = new HashMap<>();
 
         if (cmdBits.length == 1) {
@@ -33,6 +34,10 @@ public class Rq {
 
         for (String paramStr : paramBits) {
             String[] paramStrBits = paramStr.split("=", 2);
+            if (!paramStrBits[0].equals("id")) {
+                System.out.println("오타 있음(id)");
+                errMsg = "오타 있음(id)";
+            }
             String key = paramStrBits[0];
             String value = paramStrBits[1];
             params.put(key, value);
@@ -44,5 +49,8 @@ public class Rq {
 
     public String getParams(String paramName) {
         return params.get(paramName);
+    }
+    public String getErrMsg() {
+        return errMsg;
     }
 }
