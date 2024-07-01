@@ -53,8 +53,6 @@ public class MotivationController {
     }
 
     public void delete(Rq rq) {
-        System.out.println("== delete 실행 ==");
-
         int id = 0;
 
         try {
@@ -64,14 +62,8 @@ public class MotivationController {
             return;
         }
 
-        Motivation foundMotivation = null;
+        Motivation foundMotivation = findById(id);
 
-        for (Motivation motivation : motivations) {
-            if (motivation.getId() == id) {
-                foundMotivation = motivation;
-                break;
-            }
-        }
         if (foundMotivation == null) {
             System.out.printf("== %d번 motivation은 없습니다. ==\n", id);
             return;
@@ -79,40 +71,17 @@ public class MotivationController {
         motivations.remove(foundMotivation);
 
         System.out.println("== motivation delete ==");
-        System.out.printf("== %d번 motivation은 삭제되었습니다.\n", foundMotivation.getId());
+        System.out.printf("== %d번 motivation은 삭제되었습니다.\n", id);
     }
 
-    public void update(Rq rq) {
-        System.out.println("== update 실행 ==");
-
-        int id = 0;
-
-        try {
-            id = Integer.parseInt(rq.getParams("id"));
-        } catch (NumberFormatException e) {
-            System.out.println("== 숫자를 입력하세요. ==");
-        }
-
-        Motivation foundMotivation = null;
-
+    private Motivation findById(int id) {
+        Motivation foundMotivation;
         for (Motivation motivation : motivations) {
             if (motivation.getId() == id) {
                 foundMotivation = motivation;
-                break;
+                return foundMotivation;
             }
         }
-
-        if (foundMotivation == null) {
-            System.out.printf("== %d번 motivation은 없습니다. ==\n", id);
-            return;
-        }
-
-        System.out.println("== motivation update ==");
-        System.out.printf("== body == ");
-        foundMotivation.setBody(Container.getScanner().nextLine());
-        System.out.printf("== source == ");
-        foundMotivation.setSource(Container.getScanner().nextLine());
-        System.out.printf("== %d번 motivation은 수정되었습니다. ==\n", id);
-
+        return null;
     }
 }
