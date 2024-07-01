@@ -3,9 +3,7 @@ package org.koreait.motivation.controller;
 import org.koreait.Container;
 import org.koreait.motivation.entity.Motivation;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class MotivationController {
 
@@ -54,15 +52,8 @@ public class MotivationController {
     }
 
     public void delete(String cmd) {
-        String[] bits = cmd.split(" ");
-        int id = 0;
 
-        try {
-            id = Integer.parseInt(bits[1]);
-        } catch (NumberFormatException e) {
-            System.out.println("잘못된 명령어 입니다.");
-            return;
-        }
+        int id = 0;
 
         Motivation foundMotivation = null;
 
@@ -80,5 +71,32 @@ public class MotivationController {
 
         System.out.println("== motivation delete ==");
         System.out.printf("== %d번 motivation은 삭제되었습니다.\n", foundMotivation.getId());
+    }
+
+    public void update(String cmd) {
+
+        int id = 0;
+
+        Motivation foundMotivation = null;
+
+        for (Motivation motivation : motivations) {
+            if (motivation.getId() == id) {
+                foundMotivation = motivation;
+                break;
+            }
+        }
+
+        if (foundMotivation == null) {
+            System.out.printf("== %d번 motivation은 없습니다. ==\n", id);
+            return;
+        }
+
+        System.out.println("== motivation update ==");
+        System.out.printf("== body == ");
+        foundMotivation.setBody(Container.getScanner().nextLine());
+        System.out.printf("== source == ");
+        foundMotivation.setSource(Container.getScanner().nextLine());
+        System.out.printf("== %d번 motivation은 수정되었습니다. ==\n", id);
+
     }
 }

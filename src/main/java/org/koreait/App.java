@@ -30,8 +30,15 @@ public class App {
                 motivationController.add();
             } else if (cmd.equals("list")) {
                 motivationController.list();
-            } else if (cmd.startsWith("delete ")) {
+            } else if (cmd.startsWith("delete")) {
+
+                Rq rq = new Rq(cmd);
+
                 motivationController.delete(cmd);
+            } else if (cmd.startsWith("update")) {
+                motivationController.update(cmd);
+            } else {
+                System.out.println("사용할 수 없는 명령어입니다.");
             }
         }
     }
