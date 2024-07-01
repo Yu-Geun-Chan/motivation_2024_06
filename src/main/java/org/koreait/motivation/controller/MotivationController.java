@@ -1,6 +1,7 @@
 package org.koreait.motivation.controller;
 
 import org.koreait.Container;
+import org.koreait.Rq;
 import org.koreait.motivation.entity.Motivation;
 
 import java.util.*;
@@ -9,6 +10,7 @@ public class MotivationController {
 
     int lastId;
     List<Motivation> motivations;
+    Rq rq;
 
     public MotivationController() {
         lastId = 0;
@@ -51,9 +53,9 @@ public class MotivationController {
         }
     }
 
-    public void delete(String cmd) {
+    public void delete() {
 
-        int id = 0;
+        int id = Integer.parseInt(rq.getParams("id"));
 
         Motivation foundMotivation = null;
 

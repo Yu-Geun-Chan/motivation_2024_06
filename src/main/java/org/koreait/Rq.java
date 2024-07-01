@@ -10,12 +10,18 @@ public class Rq {
     Map<String, String> params;
 
     // Rq == Request(요청)
-    Rq(String cmd){
+    public Rq(String cmd){
         // parsing
         String[] cmdBits = cmd.split("\\?", 2);
 
         actionMethod = cmdBits[0];
+        
         params = new HashMap<>();
+
+        if (cmdBits.length == 1) {
+            return;
+        }
+
         String[] paramBits;
 
         try {

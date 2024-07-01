@@ -7,6 +7,7 @@ import org.koreait.system.controller.SystemController;
 import java.util.Scanner;
 
 public class App {
+    byte system_status = 1;
 
     public void run() {
         System.out.println("== motivation execution ==");
@@ -14,35 +15,38 @@ public class App {
         SystemController systemController = new SystemController();
         MotivationController motivationController = new MotivationController();
 
-        while (true) {
+        while (system_status == 1) {
             System.out.printf("command) ");
             String cmd = Container.getScanner().nextLine().trim();
 
-            if (cmd.equals("exit")) {
-                systemController.exit();
-                break;
-            } else if (cmd.length() == 0) {
+            if (cmd.length() == 0) {
                 System.out.println("명령어를 입력해주세요");
                 continue;
             }
 
-            if (cmd.equals("add")) {
-                motivationController.add();
-            } else if (cmd.equals("list")) {
-                motivationController.list();
-            } else if (cmd.startsWith("delete")) {
+            Rq rq = new Rq(cmd);
 
-                Rq rq = new Rq(cmd);
-
-                motivationController.delete(cmd);
-            } else if (cmd.startsWith("update")) {
-                motivationController.update(cmd);
-            } else {
-                System.out.println("사용할 수 없는 명령어입니다.");
+            switch (rq.getActionMethod()) {
+                case "exit":
+                    systemController.exit();
+                    system_status = 0;
+                    break;
+                case "add":
+                    motivationController.add();
+                    break;
+                case "list":
+                    motivationController.list();
+                    break;
+                case "delete":
+                    motivationController.delete();
+                default:
+                    System.out.println("사용할 수 없는 명령어입니다.");
+                    break;
             }
         }
     }
 }
+
 
 
 
