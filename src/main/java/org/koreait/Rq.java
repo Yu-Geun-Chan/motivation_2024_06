@@ -1,6 +1,5 @@
 package org.koreait;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,11 +33,11 @@ public class Rq {
 
         for (String paramStr : paramBits) {
             String[] paramStrBits = paramStr.split("=", 2);
-            if (!paramStrBits[0].equals("id")) {
+            String key = paramStrBits[0];
+            if (key.equals("id") == false) {
                 System.out.println("오타 있음(id)");
                 errMsg = "오타 있음(id)";
             }
-            String key = paramStrBits[0];
             String value = paramStrBits[1];
             params.put(key, value);
         }

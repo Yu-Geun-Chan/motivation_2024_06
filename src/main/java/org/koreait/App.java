@@ -1,10 +1,7 @@
 package org.koreait;
 
 import org.koreait.motivation.controller.MotivationController;
-import org.koreait.motivation.entity.Motivation;
 import org.koreait.system.controller.SystemController;
-
-import java.util.Scanner;
 
 public class App {
     byte system_status = 1;
@@ -44,8 +41,8 @@ public class App {
                 case "delete":
                     motivationController.delete(rq);
                     break;
-                case "update":
-                    motivationController.update(rq);
+                case "edit":
+                    motivationController.edit(rq);
                     break;
                 default:
                     System.out.println("사용할 수 없는 명령어입니다.");
